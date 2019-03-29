@@ -22,6 +22,10 @@ export default new VueRouter({
         requiresAuth:true,
       },
       component: () => import('../views/system/container/index'),
+    },
+    {
+      path:"*",
+      component: () => import('../views/public/404'),
     }
   ]
 })
