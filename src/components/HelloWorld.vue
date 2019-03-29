@@ -13,26 +13,30 @@
 export default {
   name: "HelloWorld",
   props: {
-    msg: String,
-    apijson: "我是初始数据"
+    msg: String
   },
   data() {
     return {
-      content: ""
+      content: "",
+      apijson: "我是初始数据"
     };
   },
-  methods:{
-    getname(){
-      this.axios.get('http://localhost:8888/users/user').then((res)=>{
+  methods: {
+    getname() {
+      this.axios.get("/users/user").then(res => {
         console.log(res.data);
         this.apijson = res.data;
-      })
+      });
     }
   },
   created() {
-    this.axios.post("http://api.komavideo.com/news/list").then(body => {
-      this.content = body.data;
-    });
+    this.axios
+      .post("/news/list", {
+        baseURL: 'http://api.komavideo.com',
+      })
+      .then(body => {
+        this.content = body.data;
+      });
   }
 };
 </script>
