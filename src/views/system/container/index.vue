@@ -6,7 +6,7 @@
     </div>
     <div class="con-wrapper">
       <div class="header">
-        <div class="logout" @click="logout">退出</div>
+        <div class="logout" @click="logout()">退出</div>
       </div>
       <!-- <div class="bread-wrapper">
         <Breadcrumb>
@@ -34,8 +34,8 @@ export default {
   },
   methods:{
     logout() {
-    localStorage.removeItem('token')
-    // this.$router.push('/system/login')
+    localStorage.setItem('token','')
+    this.$router.push('/')
   }
   },
 

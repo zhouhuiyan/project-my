@@ -28,6 +28,11 @@
                 Content
                 <div>
     <router-link to="/system">登录后台</router-link>
+    <div></div>
+    <router-link to="/write">写文章</router-link>
+    <div></div>
+    <router-link to="/register">注册</router-link>
+    <div></div>
     home
   </div>
             </Content>

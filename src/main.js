@@ -26,11 +26,15 @@ Vue.config.productionTip = false;
 router.beforeEach((to, from, next) => {
   NProgress.start() // 开启Progress 开启一个进度条
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (localStorage.getItem('tokena')) {
+    if (localStorage.getItem('token')) {
       next()
-    } else {
-      next('/system/login');
-      // admin登录密码 123456a
+    }else{
+      if(to.path.match('system')){
+        next('/system/login');
+        // admin登录密码 123456a
+      }else{
+        next('/login');
+      }
     }
   } else {
     next()

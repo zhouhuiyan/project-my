@@ -1,7 +1,7 @@
 <template>
   <div>
     <Card class="card">
-      后台的登录
+      前台的登录
       <div style="text-align:center">
         <Form ref="form" :model="form" :rules="rule">
           <FormItem class="formWidth" prop="user">
@@ -40,8 +40,6 @@ export default {
       this.$refs[name].validate(valid => {
         if (valid) {
           this.$Message.success("验证通过");
-          localStorage.setItem('token',"ceshiyixiazi");
-          this.$router.push('/system');
         } else {
           this.$Message.error("验证不通过");
         }
@@ -54,12 +52,12 @@ export default {
 <style lang="less" scoped>
 .card {
   width: 340px;
-  // height: 180px;
+  height: 180px;
   position: absolute;
   left: 50%;
   top: 50%;
   margin-left: -170px;
-  margin-top: -100px;
+  margin-top: -90px;
 }
 .formWidth {
   width: 300px;
