@@ -14,7 +14,7 @@
             </Input>
           </FormItem>
           <FormItem>
-            <Button type="primary" @click="handleSubmit('formInline')">Signin</Button>
+            <Button type="primary" @click="login('form')">Signin</Button>
           </FormItem>
         </Form>
       </div>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import {systemLogin} from '@/utils/rules.js';
+import { systemLogin } from "@/utils/rules.js";
 export default {
   data() {
     return {
@@ -31,43 +31,32 @@ export default {
         user: "",
         password: ""
       },
-      rule: systemLogin,
-      // rule: {
-      //   user: [
-      //     {
-      //       required: true,
-      //       message: "Please fill in the user name",
-      //       trigger: "blur"
-      //     }
-      //   ],
-      //   password: [
-      //     {
-      //       required: true,
-      //       message: "Please fill in the password.",
-      //       trigger: "blur"
-      //     },
-      //     {
-      //       type: "string",
-      //       min: 6,
-      //       message: "The password length cannot be less than 6 bits",
-      //       trigger: "blur"
-      //     }
-      //   ]
-      // }
+      rule: systemLogin
     };
+  },
+  methods: {
+    login(name) {
+      this.$refs[name].validate(valid => {
+        if (valid) {
+          this.$Message.success("验证通过");
+        } else {
+          this.$Message.error("验证不通过");
+        }
+      });
+    }
   }
 };
 </script>
 
 <style lang="less" scoped>
-.card{
-  width:340px;
-  height:180px;
+.card {
+  width: 340px;
+  height: 180px;
   position: absolute;
-  left:50%;
-  top:50%;
-  margin-left:-170px;
-  margin-top:-90px;
+  left: 50%;
+  top: 50%;
+  margin-left: -170px;
+  margin-top: -90px;
 }
 .formWidth {
   width: 300px;
