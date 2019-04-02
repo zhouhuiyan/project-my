@@ -61,8 +61,8 @@ export default {
   }
   .con-wrapper {
     margin-left: 200px;
-    padding: 80px 30px 50px;
-        background-color: #eef0f3;
+    padding: 40px 30px;
+    background-color: #eef0f3;
 
     .header {
       position: fixed;

@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <Wrapper>
     权限管理
-  </div>
+  </Wrapper>
 </template>
 
 <script>

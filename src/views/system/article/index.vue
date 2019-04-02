@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <Wrapper>
     文章管理
-  </div>
+  </Wrapper>
 </template>
 
 <script>
