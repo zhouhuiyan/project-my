@@ -24,10 +24,10 @@ export default new VueRouter({
         {
           path: "write",
           component: () => import("../views/pages/login/index"),
-          meta:{
-            requiresAuth:true,
+          meta: {
+            requiresAuth: true
           }
-        },
+        }
       ]
     },
     {
@@ -43,6 +43,14 @@ export default new VueRouter({
       },
       component: () => import("../views/system/container/index"),
       children: [
+        {
+          path: "/",
+          name: "systems",
+          meta: {
+            requiresAuth: true
+          },
+          component: () => import("../views/system/index/index")
+        },
         {
           path: "users",
           component: () => import("../views/system/users/index"),

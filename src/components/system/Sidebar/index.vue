@@ -6,7 +6,15 @@
       </router-link>
     </h2>
     <Menu mode="vertical" :theme="theme" width="100%" active-name="1">
-        <MenuItem name="hahah1" to="/system/permissions">
+      <MenuItem name="1" to="/system">
+          <!-- <Icon type="ios-paper" /> -->
+          <!-- <o-icon :type="navItem.smallIconType"
+              :size="14"
+          color="#666"></o-icon>-->
+          <!-- <Icon :type="navItem.smallIconType"/> -->
+          {{'首页'}}
+        </MenuItem>
+        <MenuItem name="2" to="/system/permissions">
           <!-- <Icon type="ios-paper" /> -->
           <!-- <o-icon :type="navItem.smallIconType"
               :size="14"
@@ -14,7 +22,7 @@
           <!-- <Icon :type="navItem.smallIconType"/> -->
           {{'权限管理'}}
         </MenuItem>
-        <MenuItem name="hahah2" to="/system/users">
+        <MenuItem name="3" to="/system/users">
           <!-- <Icon type="ios-paper" /> -->
           <!-- <o-icon :type="navItem.smallIconType"
               :size="14"
@@ -22,7 +30,7 @@
           <!-- <Icon :type="navItem.smallIconType"/> -->
           {{'用户管理'}}
         </MenuItem>
-        <MenuItem name="hahah3" to="/system/article">
+        <MenuItem name="4" to="/system/article">
           <!-- <Icon type="ios-paper"/> -->
           <!-- <o-icon :type="navItem.smallIconType"
               :size="14"
@@ -30,7 +38,7 @@
           <!-- <Icon :type="navItem.smallIconType"/> -->
           {{'文章管理'}}
         </MenuItem>
-        <MenuItem name="hahah4" to="/system/type">
+        <MenuItem name="5" to="/system/type">
           <!-- <Icon type="ios-paper" /> -->
           <!-- <o-icon :type="navItem.smallIconType"
               :size="14"
