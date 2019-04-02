@@ -6,7 +6,9 @@ import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 import NProgress from 'nprogress' // Progress 进度条
 import 'nprogress/nprogress.css' // Progress 进度条 样式
+import wrapper from './components/system/Wrapper/index';
 
+Vue.component('Wrapper', wrapper);
 
 
 Vue.use(iView);

@@ -45,7 +45,7 @@ export default new VueRouter({
       children: [
         {
           path: "users",
-          component: () => import("../views/system/type/index"),
+          component: () => import("../views/system/users/index"),
           meta: {
             requiresAuth: true
           }
@@ -58,15 +58,15 @@ export default new VueRouter({
           }
         },
         {
-          path: "/type",
-          component: () => import("../views/system/container/index"),
+          path: "type",
+          component: () => import("../views/system/type/index"),
           meta: {
             requiresAuth: true
           }
         },
         {
-          path: "/permissions",
-          component: () => import("../views/system/container/index"),
+          path: "permissions",
+          component: () => import("../views/system/permissions/index"),
           meta: {
             requiresAuth: true
           }

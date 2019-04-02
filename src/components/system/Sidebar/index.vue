@@ -6,37 +6,45 @@
       </router-link>
     </h2>
     <Menu mode="vertical" :theme="theme" width="100%" active-name="1">
-      <MenuItem name="hahah" to="/">
-        <!-- <Icon type="ios-paper" /> -->
-        <!-- <o-icon :type="navItem.smallIconType"
+        <MenuItem name="hahah1" to="/system/permissions">
+          <!-- <Icon type="ios-paper" /> -->
+          <!-- <o-icon :type="navItem.smallIconType"
               :size="14"
-        color="#666"></o-icon>-->
-        <!-- <Icon :type="navItem.smallIconType"/> -->
-        {{'哈哈哈'}}
-      </MenuItem>
-      <MenuItem name="hahah" to="/">
-        <!-- <Icon type="ios-paper" /> -->
-        <!-- <o-icon :type="navItem.smallIconType"
+          color="#666"></o-icon>-->
+          <!-- <Icon :type="navItem.smallIconType"/> -->
+          {{'权限管理'}}
+        </MenuItem>
+        <MenuItem name="hahah2" to="/system/users">
+          <!-- <Icon type="ios-paper" /> -->
+          <!-- <o-icon :type="navItem.smallIconType"
               :size="14"
-        color="#666"></o-icon>-->
-        <!-- <Icon :type="navItem.smallIconType"/> -->
-        {{'哈哈哈1'}}
-      </MenuItem>
-      <MenuItem name="hahah" to="/">
-        <!-- <Icon type="ios-paper" /> -->
-        <!-- <o-icon :type="navItem.smallIconType"
+          color="#666"></o-icon>-->
+          <!-- <Icon :type="navItem.smallIconType"/> -->
+          {{'用户管理'}}
+        </MenuItem>
+        <MenuItem name="hahah3" to="/system/article">
+          <!-- <Icon type="ios-paper"/> -->
+          <!-- <o-icon :type="navItem.smallIconType"
               :size="14"
-        color="#666"></o-icon>-->
-        <!-- <Icon :type="navItem.smallIconType"/> -->
-        {{'哈哈哈2'}}
-      </MenuItem>
+          color="#666"></o-icon>-->
+          <!-- <Icon :type="navItem.smallIconType"/> -->
+          {{'文章管理'}}
+        </MenuItem>
+        <MenuItem name="hahah4" to="/system/type">
+          <!-- <Icon type="ios-paper" /> -->
+          <!-- <o-icon :type="navItem.smallIconType"
+              :size="14"
+          color="#666"></o-icon>-->
+          <!-- <Icon :type="navItem.smallIconType"/> -->
+          {{'类型管理'}}
+        </MenuItem>
       <!-- <MenuItem v-for="navItem in navList" :name="navItem.id" :to="navItem.href" :key="navItem.id"> -->
-        <!-- <Icon type="ios-paper" /> -->
-        <!-- <o-icon :type="navItem.smallIconType"
+      <!-- <Icon type="ios-paper" /> -->
+      <!-- <o-icon :type="navItem.smallIconType"
               :size="14"
-        color="#666"></o-icon>-->
-        <!-- <Icon :type="navItem.smallIconType"/> -->
-        <!-- {{navItem.text}} -->
+      color="#666"></o-icon>-->
+      <!-- <Icon :type="navItem.smallIconType"/> -->
+      <!-- {{navItem.text}} -->
       <!-- </MenuItem> -->
     </Menu>
     <div class="switch-wrapper">
@@ -102,8 +110,9 @@ export default {
     padding-bottom: 30px;
   }
   .ivu-menu-item {
+    // text-align:left;
     font-size: 13px;
-    padding: 16px 55px;
+    padding: 16px 0;
   }
   .switch-wrapper {
     display: flex;
