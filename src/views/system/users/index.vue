@@ -1,6 +1,7 @@
 <template>
     <Wrapper>
     用户管理
+    <router-view></router-view>
 
     </Wrapper>
 </template>

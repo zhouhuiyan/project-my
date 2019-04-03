@@ -8,6 +8,12 @@ import NProgress from 'nprogress' // Progress 进度条
 import 'nprogress/nprogress.css' // Progress 进度条 样式
 import wrapper from './components/system/Wrapper/index';
 
+import "./assets/ue/ueditor.config.js";
+import "./assets/ue/ueditor.all.js";
+import "./assets/ue/lang/zh-cn/zh-cn.js";
+import "./assets/ue/ueditor.parse.js";
+
+
 Vue.component('Wrapper', wrapper);
 
 

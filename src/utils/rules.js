@@ -1,5 +1,6 @@
 /**
  * 后台登录页面的表单验证规则
+ * @author zhy
  */
 export const systemLogin = {
   user: [
