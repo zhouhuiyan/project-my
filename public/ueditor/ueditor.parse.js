@@ -1,7 +1,7 @@
 /*!
  * UEditor
  * version: ueditor
- * build: Wed Aug 10 2016 11:06:03 GMT+0800 (CST)
+ * build: Wed Dec 26 2018 17:25:05 GMT+0800 (CST)
  */
 
 (function(){
@@ -308,7 +308,7 @@
             })
         }
     };
-    uParse = function(selector,opt){
+    var uParse = function(selector,opt){
         utils.domReady(function(){
             var contents;
             if(document.querySelectorAll){

@@ -54,6 +54,9 @@
         ></Input>
       </FormItem>
       <FormItem>
+        <Ueditor :defaultMsg="'这是测试'"></Ueditor>
+      </FormItem>
+      <FormItem>
         <Button type="primary">Submit</Button>
         <Button style="margin-left: 8px" @click="$router.push('/system/article/list')">Cancel</Button>
       </FormItem>
@@ -62,9 +65,16 @@
 </template>
 
 <script>
+import Ueditor from "@/components/ueditor/index";
+import { quillEditor } from "vue-quill-editor"; //调用编辑器
 export default {
+  components: {
+    Ueditor,
+    quillEditor
+  },
   data() {
     return {
+      editorOption: {},
       formItem: {
         input: "",
         select: "",
@@ -75,15 +85,46 @@ export default {
         time: "",
         slider: [20, 50],
         textarea: ""
-      }
+      },
+      content: ""
     };
+  },
+  computed: {
+    editor() {
+      return this.$refs.myQuillEditor.quill;
+    }
+  },
+  methods: {
+    onEditorReady() {},
+    onSubmit() {
+      //提交
+      //this.$refs.infoForm.validate，这是表单验证
+      this.$refs.infoForm.validate(valid => {
+        if (valid) {
+          this.$post("m/add/about/us", this.infoForm).then(res => {
+            if (res.errCode == 200) {
+              this.$message({
+                message: res.errMsg,
+                type: "success"
+              });
+              this.$router.push("/aboutus/aboutlist");
+            } else {
+              this.$message({
+                message: res.errMsg,
+                type: "error"
+              });
+            }
+          });
+        }
+      });
+    }
   }
 };
 </script>
 
 <style lang="less" scoped>
-.formbox{
-  width:400px;
-  margin:0 auto;
+.formbox {
+  width: 400px;
+  margin: 0 auto;
 }
 </style>

@@ -19,7 +19,7 @@
      * 因此，UEditor提供了针对不同页面的编辑器可单独配置的根路径，具体来说，在需要实例化编辑器的页面最顶部写上如下代码即可。当然，需要令此处的URL等于对应的配置。
      * window.UEDITOR_HOME_URL = "/xxxx/xxxx/";
      */
-    // window.UEDITOR_HOME_URL = "/public/ueditor/"
+    window.UEDITOR_HOME_URL = "/public/ueditor/"
     var URL = window.UEDITOR_HOME_URL || getUEBasePath();
 
     /**
@@ -363,7 +363,7 @@
 		//output xss过滤
 		,outputXssFilter: true
 		// xss过滤白名单 名单来源: https://raw.githubusercontent.com/leizongmin/js-xss/master/lib/default.js
-		,whitList: {
+		,whiteList: {
 			a:      ['target', 'href', 'title', 'class', 'style'],
 			abbr:   ['title', 'class', 'style'],
 			address: ['class', 'style'],
