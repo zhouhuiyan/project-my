@@ -15,7 +15,8 @@
             </Input>
           </FormItem>
           <FormItem>
-            <Button type="primary" @click="login('form')">Signin</Button>
+            <Button type="primary" @click="login('form')" style="margin-right:10px;">登录</Button>
+            <Button type="primary" @click="$router.push('/')">返回</Button>
           </FormItem>
         </Form>
       </div>
@@ -25,6 +26,8 @@
 
 <script>
 import { systemLogin } from "@/utils/rules.js";
+import { checkExist } from "@/utils/api.js";
+
 export default {
   data() {
     return {
@@ -32,14 +35,24 @@ export default {
         user: "",
         password: ""
       },
-      rule: systemLogin
+      rule: systemLogin,
+      userexist: false
     };
   },
   methods: {
     login(name) {
       this.$refs[name].validate(valid => {
         if (valid) {
-          this.$Message.success("验证通过");
+          checkExist({ account: this.form.user }).then(res => {
+            if (res.data.datalist.length != 0) {
+              this.$Message.success("验证通过");
+              sessionStorage.setItem("token", "ceshiyixiazi");
+              sessionStorage.setItem("nickname",res.data.datalist.nickname);
+              this.$router.push("/");
+            } else {
+              this.$Message.success("用户不存在");
+            }
+          });
         } else {
           this.$Message.error("验证不通过");
         }
@@ -52,12 +65,12 @@ export default {
 <style lang="less" scoped>
 .card {
   width: 340px;
-  height: 180px;
+  // height: 180px;
   position: absolute;
   left: 50%;
   top: 50%;
   margin-left: -170px;
-  margin-top: -90px;
+  margin-top: -100px;
 }
 .formWidth {
   width: 300px;

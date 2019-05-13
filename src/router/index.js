@@ -22,8 +22,8 @@ export default new VueRouter({
           component: () => import("../views/pages/register/index")
         },
         {
-          path: "write",
-          component: () => import("../views/pages/login/index"),
+          path: "view",
+          component: () => import("../views/pages/view/index"),
           meta: {
             requiresAuth: true
           }
@@ -37,20 +37,12 @@ export default new VueRouter({
     },
     {
       path: "/system",
-      name: "systems",
+     
       meta: {
         requiresAuth: true
       },
       component: () => import("../views/system/container/index"),
       children: [
-        {
-          path: "/",
-          name: "systems",
-          meta: {
-            requiresAuth: true
-          },
-          component: () => import("../views/system/index/index")
-        },
         {
           path: "users",
           component: () => import("../views/system/users/index"),
@@ -63,7 +55,7 @@ export default new VueRouter({
               component: () => import("../views/system/users/list"),
               meta:{
                 requiresAuth:true,
-              }
+              } 
             },
             {
               path: "add",
@@ -160,6 +152,29 @@ export default new VueRouter({
                 requiresAuth:true,
               }
             }
+          ]
+        },
+        {
+          path: "review",
+          component: () => import("../views/system/review/index"),
+          meta: {
+            requiresAuth: true
+          },
+          children: [
+            {
+              path: "list",
+              component: () => import("../views/system/review/list"),
+              meta:{
+                requiresAuth:true,
+              }
+            },
+            {
+              path: "view",
+              component: () => import("../views/system/review/view"),
+              meta:{
+                requiresAuth:true,
+              }
+            },
           ]
         },
         {

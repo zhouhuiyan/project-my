@@ -17,7 +17,8 @@ export const table=[
   },
   {
     title: "Action",
-    slot: "action"
+    slot: "action",
+
   }
 ];
 
@@ -27,12 +28,33 @@ export const table=[
  */
 export const article=[
   {
-    title: "Name",
-    key: "name"
+    title: "文章ID",
+    key: "id"
   },
   {
-    title: "Name",
-    key: "name"
+    title: "文章标题",
+    key: "title"
+  },
+  {
+    title: "文章作者",
+    key: "author"
+  },
+  {
+    title: "文章内容",
+    slot: "content"
+  },
+  {
+    title: "创建时间",
+    slot: "createtime"
+  },
+  {
+    title: "文章状态",
+    slot: "status"
+  },
+  {
+    title: "操作",
+    slot: "action",
+    minWidth:100
   }
 ];
 
@@ -42,12 +64,35 @@ export const article=[
  */
 export const users=[
   {
-    title: "Name",
-    key: "name"
+    id: "用户ID",
+    key: "id",
+    width:40
   },
   {
-    title: "Name",
-    key: "name"
+    title: "用户名",
+    key: "account"
+  },
+  {
+    title: "昵称",
+    key: "nickname"
+  },
+  {
+    title:"角色",
+    key: "role"
+  },
+  {
+    title:"注册时间",
+    slot:"createtime",
+    width:150
+  },
+  {
+    title:"账号状态",
+    slot: "status"
+  },
+  {
+    title:"操作",
+    slot: "action",
+    minWidth:80
   }
 ];
 
@@ -72,11 +117,62 @@ export const permissions=[
  */
 export const type=[
   {
-    title: "Name",
+    title: "id",
+    key: "id"
+  },
+  {
+    title: "分类名称",
     key: "name"
   },
   {
-    title: "Name",
-    key: "name"
+    title: "分类状态",
+    slot: "status"
+  },
+  {
+    title: "操作",
+    slot: "action",
+    minWidth:80
   }
-]
+];
+
+/**
+ * 后台评论管理表格表头
+ * @author zhy 
+ */
+export const review=[
+  {
+    id: "评论ID",
+    key: "id",
+    width:40
+  },
+  {
+    title: "评论人",
+    key: "critics"
+  },
+  // {
+  //   title: "文章ID",
+  //   key: "art_id"
+  // },
+  {
+    title: "文章标题",
+    key: "title"
+  },
+  {
+    title: "评论内容",
+    key: "content"
+  },
+  {
+    title: "评论时间",
+    slot: "createtime",
+    width:150
+  },
+  {
+    title: "评论状态",
+    slot: "state"
+  },
+  {
+    title: "操作",
+    slot: "action",
+    minWidth:80
+  }
+];

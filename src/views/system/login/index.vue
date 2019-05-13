@@ -15,7 +15,8 @@
             </Input>
           </FormItem>
           <FormItem>
-            <Button type="primary" @click="login('form')">Signin</Button>
+            <Button type="primary" @click="login('form')" style="margin-right:10px;">登录</Button>
+            <Button type="primary" @click="$router.push('/')">返回</Button>
           </FormItem>
         </Form>
       </div>
@@ -25,6 +26,8 @@
 
 <script>
 import { systemLogin } from "@/utils/rules.js";
+import { slogin } from "@/utils/api.js";
+
 export default {
   data() {
     return {
@@ -32,16 +35,23 @@ export default {
         user: "",
         password: ""
       },
-      rule: systemLogin
+      rule: systemLogin,
+      userexist: false
     };
   },
   methods: {
     login(name) {
       this.$refs[name].validate(valid => {
         if (valid) {
-          this.$Message.success("验证通过");
-          localStorage.setItem('token',"ceshiyixiazi");
-          this.$router.push('/system');
+          slogin({ account: this.form.user }).then(res => {
+            if (res.data.datalist.length != 0) {
+              this.$Message.success("验证通过");
+              sessionStorage.setItem("token", "ceshiyixiazi");
+              this.$router.push("/system/users/list");
+            } else {
+              this.$Message.success("用户不存在");
+            }
+          });
         } else {
           this.$Message.error("验证不通过");
         }

@@ -8,39 +8,32 @@
       <div class="header">
         <div class="logout" @click="logout()">退出</div>
       </div>
-      <!-- <div class="bread-wrapper">
-        <Breadcrumb>
-          <BreadcrumbItem to="/">Home</BreadcrumbItem>
-          <BreadcrumbItem to="/components/breadcrumb">Components</BreadcrumbItem>
-          <BreadcrumbItem>Breadcrumb</BreadcrumbItem>
-        </Breadcrumb>
-      </div> -->
       <router-view></router-view>
     </div>
+    2019 &copy; zhy
   </div>
 </template>
 <script>
-import Sidebar from '@/components/system/Sidebar/index.vue'
+import Sidebar from "@/components/system/Sidebar/index.vue";
 // import { navList } from '@/utils/config.js'
 
 export default {
   components: {
     Sidebar
   },
-  data(){
-    return{
+  data() {
+    return {
       // navList: navList,
-    }
+    };
   },
-  methods:{
+  methods: {
     logout() {
-    localStorage.setItem('token','')
-    this.$router.push('/')
-  }
-  },
+      sessionStorage.setItem("token", "");
 
-  
-}
+      this.$router.push("/");
+    }
+  }
+};
 </script>
 
 <style lang="less" scoped>
@@ -54,7 +47,7 @@ export default {
     top: 0;
     bottom: 0;
     width: 200px;
-    z-index:10;
+    z-index: 10;
   }
   .bread-wrapper {
     padding: 5px 0 30px 2px;

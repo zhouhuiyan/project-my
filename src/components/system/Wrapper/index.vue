@@ -14,6 +14,7 @@ export default {
 
 <style lang="less" scoped>
 .wrapper {
+  margin-top:30px;
   background: #fff;
   border-radius: 5px;
   padding: 30px 24px 24px;

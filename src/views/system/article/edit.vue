@@ -1,89 +1,120 @@
 <template>
   <div class="formbox">
-    <Form :model="formItem" :label-width="80">
-      <FormItem label="Input">
-        <Input v-model="formItem.input" placeholder="Enter something..."></Input>
+    <Form ref="formItem" :model="formItem" :rules="rule" :label-width="100">
+      <FormItem class="item" prop="title" label="文章标题：">
+        <Input v-model="formItem.title"/>
       </FormItem>
-      <FormItem label="Select">
-        <Select v-model="formItem.select">
-          <Option value="beijing">New York</Option>
-          <Option value="shanghai">London</Option>
-          <Option value="shenzhen">Sydney</Option>
+      <FormItem class="item" prop="type" label="分类选择：">
+        <Select v-model="formItem.type">
+          <Option v-for="(item,index) in typeData" :value="item.id" :key="index">{{item.name}}</Option>
         </Select>
       </FormItem>
-      <FormItem label="DatePicker">
-        <Row>
-          <Col span="11">
-            <DatePicker type="date" placeholder="Select date" v-model="formItem.date"></DatePicker>
-          </Col>
-          <Col span="2" style="text-align: center">-</Col>
-          <Col span="11">
-            <TimePicker type="time" placeholder="Select time" v-model="formItem.time"></TimePicker>
-          </Col>
-        </Row>
-      </FormItem>
-      <FormItem label="Radio">
-        <RadioGroup v-model="formItem.radio">
-          <Radio label="male">Male</Radio>
-          <Radio label="female">Female</Radio>
-        </RadioGroup>
-      </FormItem>
-      <FormItem label="Checkbox">
-        <CheckboxGroup v-model="formItem.checkbox">
-          <Checkbox label="Eat"></Checkbox>
-          <Checkbox label="Sleep"></Checkbox>
-          <Checkbox label="Run"></Checkbox>
-          <Checkbox label="Movie"></Checkbox>
-        </CheckboxGroup>
-      </FormItem>
-      <FormItem label="Switch">
-        <i-switch v-model="formItem.switch" size="large">
-          <span slot="open">On</span>
-          <span slot="close">Off</span>
-        </i-switch>
-      </FormItem>
-      <FormItem label="Slider">
-        <Slider v-model="formItem.slider" range></Slider>
-      </FormItem>
-      <FormItem label="Text">
+      <FormItem class="item" prop="dest" label="文章简介：">
         <Input
-          v-model="formItem.textarea"
+          v-model="formItem.dest"
           type="textarea"
           :autosize="{minRows: 2,maxRows: 5}"
-          placeholder="Enter something..."
-        ></Input>
+        />
       </FormItem>
-      <FormItem>
-        <Button type="primary">Submit</Button>
-        <Button style="margin-left: 8px" @click="$router.push('/system/article/list')">Cancel</Button>
+      <FormItem prop="content" label="文章内容：" class="item">
+        <Input
+          v-model="formItem.content"
+          type="textarea"
+          :autosize="{minRows: 4,maxRows: 7}"
+        />
+        <!-- <editor
+          width="500px"
+          :apiKey="'3jpkbdwd3uvuh25ual55scqc4po3of4you6whoby5dixddiq'"
+          v-model="formItem.content"
+        ></editor> -->
+      </FormItem>
+
+      <FormItem class="item">
+        <Button type="primary" @click="edit('formItem')">提交</Button>
+        <Button style="margin-left: 8px" @click="$router.push('/system/article/list')">取消</Button>
       </FormItem>
     </Form>
   </div>
 </template>
 
 <script>
+import { systemAddArt } from "@/utils/rules.js";
+import { editArt, getTypeList,getOneArt } from "@/utils/api";
 export default {
   data() {
     return {
+      rule: systemAddArt,
       formItem: {
-        input: "",
-        select: "",
-        radio: "male",
-        checkbox: [],
-        switch: true,
-        date: "",
-        time: "",
-        slider: [20, 50],
-        textarea: ""
-      }
+        title: "",
+        type: null,
+        content: "",
+        author_id: 1,
+        dest: "",
+        id:this.$route.query.id
+      },
+      typeData: []
     };
+  },
+  computed: {},
+  methods: {
+    edit(name) {
+      this.$refs[name].validate(valid => {
+        if (valid) {
+          editArt(this.formItem).then(res => {
+            if (res.data.datalist) {
+              this.$Message.success("请求成功");
+              this.$router.push('/system/article/list')
+            } else {
+              this.$Message.error("请求失败");
+            }
+          });
+        } else {
+          this.$Message.error("验证不通过");
+        }
+      });
+    },
+    typeList() {
+      getTypeList().then(res => {
+        this.typeData = res.data.datalist;
+      });
+    },
+    getList() {
+      var params = {
+        id:this.$route.query.id,
+      };
+      getOneArt(params).then(res => {
+        console.log(res);
+        this.formItem.title = res.data.datalist[0].title;
+        this.formItem.type = res.data.datalist[0].type;
+        this.formItem.content = res.data.datalist[0].content;
+        this.formItem.author_id = res.data.datalist[0].author_id;
+        this.formItem.dest = res.data.datalist[0].dest;
+      });
+    },
+  },
+  created() {
+    this.typeList();
+    this.getList();
   }
 };
 </script>
 
 <style lang="less" scoped>
-.formbox{
-  width:400px;
-  margin:0 auto;
+.formbox {
+  // width: 400px;
+  margin: 0 auto;
+  padding-top: 20px;
+  .item {
+    width: 400px;
+    margin: 0 auto 24px;
+    text-align: left;
+  }
+  .editorwrap {
+    padding: 0 5%;
+    .ivu-form-item-label {
+      position: relative;
+      top: 0px;
+    }
+  }
 }
 </style>

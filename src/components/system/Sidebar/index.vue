@@ -6,45 +6,17 @@
       </router-link>
     </h2>
     <Menu mode="vertical" :theme="theme" width="100%" active-name="1">
-      <MenuItem name="1" to="/system">
-          <!-- <Icon type="ios-paper" /> -->
-          <!-- <o-icon :type="navItem.smallIconType"
-              :size="14"
-          color="#666"></o-icon>-->
-          <!-- <Icon :type="navItem.smallIconType"/> -->
-          {{'首页'}}
-        </MenuItem>
-        <MenuItem name="2" to="/system/permissions/list">
-          <!-- <Icon type="ios-paper" /> -->
-          <!-- <o-icon :type="navItem.smallIconType"
-              :size="14"
-          color="#666"></o-icon>-->
-          <!-- <Icon :type="navItem.smallIconType"/> -->
-          {{'权限管理'}}
-        </MenuItem>
         <MenuItem name="3" to="/system/users/list">
-          <!-- <Icon type="ios-paper" /> -->
-          <!-- <o-icon :type="navItem.smallIconType"
-              :size="14"
-          color="#666"></o-icon>-->
-          <!-- <Icon :type="navItem.smallIconType"/> -->
           {{'用户管理'}}
         </MenuItem>
         <MenuItem name="4" to="/system/article/list">
-          <!-- <Icon type="ios-paper"/> -->
-          <!-- <o-icon :type="navItem.smallIconType"
-              :size="14"
-          color="#666"></o-icon>-->
-          <!-- <Icon :type="navItem.smallIconType"/> -->
           {{'文章管理'}}
         </MenuItem>
         <MenuItem name="5" to="/system/type/list">
-          <!-- <Icon type="ios-paper" /> -->
-          <!-- <o-icon :type="navItem.smallIconType"
-              :size="14"
-          color="#666"></o-icon>-->
-          <!-- <Icon :type="navItem.smallIconType"/> -->
-          {{'类型管理'}}
+          {{'分类管理'}}
+        </MenuItem>
+        <MenuItem name="6" to="/system/review/list">
+          {{'评论管理'}}
         </MenuItem>
       <!-- <MenuItem v-for="navItem in navList" :name="navItem.id" :to="navItem.href" :key="navItem.id"> -->
       <!-- <Icon type="ios-paper" /> -->

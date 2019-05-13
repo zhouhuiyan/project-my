@@ -1,27 +1,27 @@
 <template>
   <div style="text-align:left;">
     <div style="margin:20px;"></div>
-      <Button style="margin-left: 8px" @click="$router.push('/system/users/add')">添加</Button>
-    <Table :columns="columns" :data="data" :height="470">
-      <template slot-scope="{ row }" slot="status">{{row.status == 0 ? '正常' : '删除'}}</template>
+    <Table :columns="reviewcolumns" :data="review" :height="470">
       <template
         slot-scope="{row}"
         slot="createtime"
       >{{$dayjs(row.createtime*1000).format("YYYY-MM-DD HH:mm:ss")}}</template>
-      <template slot-scope="{ row }" slot="action">
+      <template slot-scope="{ row }" slot="state">{{row.state == 0 ? '正常' : '封禁'}}</template>
+      <template slot-scope="{ row, index }" slot="action">
         <Button
           type="info"
           size="small"
           style="margin-right: 10px"
-          @click="$router.push({path:'/system/users/view',query: {id: row.id}})"
+          @click="$router.push({path:'/system/review/view',query: {id: row.id}})"
         >查看</Button>
         <Button
           style="margin-right: 10px"
+          :disabled="row.state == 0 "
           type="success"
           size="small"
-          @click="$router.push({path:'/system/users/edit',query: {id: row.id}})"
-        >修改</Button>
-        <Button type="error" size="small" :disabled="row.status == 1" @click="editState(1,row.id)">删除</Button>
+          @click="editState(0,row.id)"
+        >恢复</Button>
+        <Button type="error" size="small" :disabled="row.state == 1" @click="editState(1,row.id)">封禁</Button>
       </template>
     </Table>
 
@@ -41,18 +41,19 @@
 </template>
 
 <script>
-import { users } from "@/utils/tablecolumns.js";
-import { getUserList, userState } from "@/utils/api.js";
+import { review } from "@/utils/tablecolumns.js";
+import { getReviewList, updateState } from "@/utils/api.js";
 export default {
   data() {
     return {
-      columns: users,
-      data: [
+      reviewcolumns: review,
+      review: [
         {
           id: "zhangsan",
-          account: "7888",
-          nickname: "hahahah",
-          role: "12",
+          critics: "7888",
+          // art_id: "hahahah",
+          title: "12",
+          content: "12",
           createtime: 123456787654,
           state: 0
         }
@@ -60,10 +61,12 @@ export default {
       offset: 1,
       page_size: 10,
       count: 100,
+      state: 0,
+      id: 1
     };
   },
   methods: {
-    edit() {
+    remove() {
       /* eslint-disable */
       console.log("删除一个");
       this.editState(state, id);
@@ -79,17 +82,19 @@ export default {
         offset: this.offset,
         page_size: this.page_size
       };
-      getUserList(params).then(res => {
-        this.data = res.data.datalist.reviewlist;
+      getReviewList(params).then(res => {
+        console.log("评论列表：", res);
+        this.review = res.data.datalist.reviewlist;
         this.count = res.data.datalist.count;
       });
     },
-    editState(status, id) {
+    editState(state, id) {
       var params = {
-        status: status,
+        state: state,
         id: id
       };
-      userState(params).then(res => {
+      updateState(params).then(res => {
+        console.log("得到的结果：", res);
         this.getlist();
       });
     }

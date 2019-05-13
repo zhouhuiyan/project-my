@@ -1,26 +1,26 @@
 <template>
   <div style="text-align:left;">
-    <Button style="margin-left: 8px" @click="$router.push('/system/users/list')">返回</Button>
+    <Button style="margin-left: 8px" @click="$router.push('/system/review/list')">返回</Button>
 
     <div class="formbox">
       <Form  :label-width="80">
-        <FormItem label="用户名：">
-          {{this.datalist.account}}
+        <FormItem label="评论ID：">
+          {{this.datalist.id}}
         </FormItem>
-        <FormItem label="昵称：">
-          {{this.datalist.nickname}}
+        <FormItem label="评论人：">
+          {{this.datalist.critics}}
         </FormItem>
-        <FormItem label="性别：">
-          {{this.datalist.gender == 0 ? '女' : '男' }}
+        <FormItem label="评论文章：">
+          {{this.datalist.title}}
         </FormItem>
-        <FormItem label="个人简介：">
-          {{this.datalist.introduce}}
+        <FormItem label="评论内容：">
+          {{this.datalist.content}}
         </FormItem>
-        <FormItem label="注册时间：">
+        <FormItem label="评论时间：">
           {{$dayjs(this.datalist.createtime*1000).format('YYYY-MM-DD HH:mm:ss')}}
         </FormItem>
-        <FormItem label="账号状态：">
-          {{this.datalist.status ==0 ? '正常' : '封禁' }}
+        <FormItem label="评论状态：">
+          {{this.datalist.state ==0 ? '正常' : '封禁' }}
         </FormItem>
       </Form>
     </div>
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { getOneUser } from "@/utils/api.js";
+import { getOneReview } from "@/utils/api.js";
 export default {
   data() {
     return {
@@ -40,7 +40,8 @@ export default {
       var params = {
         id:this.$route.query.id,
       };
-      getOneUser(params).then(res => {
+      getOneReview(params).then(res => {
+        console.log("评论列表view：", res);
         this.datalist = res.data.datalist[0];
       });
     }

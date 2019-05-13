@@ -1,130 +1,110 @@
 <template>
   <div class="formbox">
-    <Form :model="formItem" :label-width="80">
-      <FormItem label="Input">
-        <Input v-model="formItem.input" placeholder="Enter something..."></Input>
+    <Form ref="formItem" :model="formItem" :rules="rule" :label-width="100">
+      <FormItem class="item" prop="title" label="文章标题：">
+        <Input v-model="formItem.title"/>
       </FormItem>
-      <FormItem label="Select">
-        <Select v-model="formItem.select">
-          <Option value="beijing">New York</Option>
-          <Option value="shanghai">London</Option>
-          <Option value="shenzhen">Sydney</Option>
+      <FormItem class="item" prop="type" label="分类选择：">
+        <Select v-model="formItem.type">
+          <Option v-for="(item,index) in typeData" :value="item.id" :key="index">{{item.name}}</Option>
         </Select>
       </FormItem>
-      <FormItem label="DatePicker">
-        <Row>
-          <Col span="11">
-            <DatePicker type="date" placeholder="Select date" v-model="formItem.date"></DatePicker>
-          </Col>
-          <Col span="2" style="text-align: center">-</Col>
-          <Col span="11">
-            <TimePicker type="time" placeholder="Select time" v-model="formItem.time"></TimePicker>
-          </Col>
-        </Row>
-      </FormItem>
-      <FormItem label="Radio">
-        <RadioGroup v-model="formItem.radio">
-          <Radio label="male">Male</Radio>
-          <Radio label="female">Female</Radio>
-        </RadioGroup>
-      </FormItem>
-      <FormItem label="Checkbox">
-        <CheckboxGroup v-model="formItem.checkbox">
-          <Checkbox label="Eat"></Checkbox>
-          <Checkbox label="Sleep"></Checkbox>
-          <Checkbox label="Run"></Checkbox>
-          <Checkbox label="Movie"></Checkbox>
-        </CheckboxGroup>
-      </FormItem>
-      <FormItem label="Switch">
-        <i-switch v-model="formItem.switch" size="large">
-          <span slot="open">On</span>
-          <span slot="close">Off</span>
-        </i-switch>
-      </FormItem>
-      <FormItem label="Slider">
-        <Slider v-model="formItem.slider" range></Slider>
-      </FormItem>
-      <FormItem label="Text">
+      <FormItem class="item" prop="dest" label="文章简介：">
         <Input
-          v-model="formItem.textarea"
+          v-model="formItem.dest"
           type="textarea"
           :autosize="{minRows: 2,maxRows: 5}"
-          placeholder="Enter something..."
-        ></Input>
+        />
       </FormItem>
-      <FormItem>
-        <Ueditor :defaultMsg="'这是测试'"></Ueditor>
+      <FormItem prop="content" label="文章内容：" class="item">
+        <Input
+          v-model="formItem.content"
+          type="textarea"
+          :autosize="{minRows: 4,maxRows: 7}"
+        />
+        <!-- <editor
+          width="500px"
+          :apiKey="'3jpkbdwd3uvuh25ual55scqc4po3of4you6whoby5dixddiq'"
+          v-model="formItem.content"
+        ></editor> -->
       </FormItem>
-      <FormItem>
-        <Button type="primary">Submit</Button>
-        <Button style="margin-left: 8px" @click="$router.push('/system/article/list')">Cancel</Button>
+
+      <FormItem class="item">
+        <Button type="primary" @click="add('formItem')">提交</Button>
+        <Button style="margin-left: 8px" @click="$router.push('/system/article/list')">取消</Button>
       </FormItem>
     </Form>
   </div>
 </template>
 
 <script>
-import Ueditor from "@/components/ueditor/index";
-import { quillEditor } from "vue-quill-editor"; //调用编辑器
+import Editor from "@tinymce/tinymce-vue";
+import { systemAddArt } from "@/utils/rules.js";
+import { addArt, getTypeList} from "@/utils/api";
 export default {
   components: {
-    Ueditor,
-    quillEditor
+    Editor
   },
   data() {
     return {
-      editorOption: {},
+      rule: systemAddArt,
       formItem: {
-        input: "",
-        select: "",
-        radio: "male",
-        checkbox: [],
-        switch: true,
-        date: "",
-        time: "",
-        slider: [20, 50],
-        textarea: ""
+        title: "",
+        type: null,
+        content: "",
+        author_id: 1,
+        dest: ""
       },
-      content: ""
+      content: "wo shi ce shi !",
+      typeData: []
     };
   },
-  computed: {
-    editor() {
-      return this.$refs.myQuillEditor.quill;
-    }
-  },
+  computed: {},
   methods: {
-    onEditorReady() {},
-    onSubmit() {
-      //提交
-      //this.$refs.infoForm.validate，这是表单验证
-      this.$refs.infoForm.validate(valid => {
+    add(name) {
+      this.$refs[name].validate(valid => {
         if (valid) {
-          this.$post("m/add/about/us", this.infoForm).then(res => {
-            if (res.errCode == 200) {
-              this.$message({
-                message: res.errMsg,
-                type: "success"
-              });
-              this.$router.push("/aboutus/aboutlist");
+          addArt(this.formItem).then(res => {
+            if (res.data.datalist) {
+              this.$Message.success("请求成功");
+              this.$router.push('/system/article/list')
             } else {
-              this.$message({
-                message: res.errMsg,
-                type: "error"
-              });
+              this.$Message.error("请求失败");
             }
           });
+        } else {
+          this.$Message.error("验证不通过");
         }
       });
-    }
+    },
+    typeList() {
+      getTypeList().then(res => {
+        this.typeData = res.data.datalist;
+      });
+    },
+  },
+  created() {
+    this.typeList();
   }
 };
 </script>
 
 <style lang="less" scoped>
 .formbox {
-  width: 400px;
+  // width: 400px;
   margin: 0 auto;
+  padding-top: 20px;
+  .item {
+    width: 400px;
+    margin: 0 auto 24px;
+    text-align: left;
+  }
+  .editorwrap {
+    padding: 0 5%;
+    .ivu-form-item-label {
+      position: relative;
+      top: 0px;
+    }
+  }
 }
 </style>
