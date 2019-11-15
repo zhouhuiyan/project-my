@@ -8,7 +8,9 @@ import NProgress from 'nprogress' // Progress 进度条
 import 'nprogress/nprogress.css' // Progress 进度条 样式
 import dayjs from 'dayjs'
 import wrapper from './components/system/Wrapper/index';
+import ueditor from './components/ueditor/index';
 Vue.component('Wrapper', wrapper);
+Vue.component('ueditor', ueditor);
 // import Editor from '@tinymce/tinymce-vue';
 Vue.prototype.$dayjs = dayjs;
 Vue.use(iView);
