@@ -19,7 +19,6 @@
           :apiKey="'3jpkbdwd3uvuh25ual55scqc4po3of4you6whoby5dixddiq'"
           v-model="formItem.content"
         ></editor>-->
-        <script id="editor" type="text/plain" style="width:524px;height:500px;border:1px solid #000;position:relative"></script>
       </FormItem>
 
       <FormItem class="item">
@@ -31,21 +30,10 @@
 </template>
 
 <script>
-import Editor from "@tinymce/tinymce-vue";
 import { systemAddArt } from "@/utils/rules.js";
 import { addArt, getTypeList } from "@/utils/api";
-
-// import "../../../../public/ueditor/ueditor.config.js";
-// import "../../../../public/ueditor/ueditor.all.js";
-// import "../../../../public/ueditor/lang/zh-cn/zh-cn.js";
-// import "../../../../public/ueditor/ueditor.parse.js";
-import "../../../../static/UE/ueditor.config.js";
-import "../../../../static/UE/ueditor.all.js";
-import "../../../../static/UE/lang/zh-cn/zh-cn.js";
-import "../../../../static/UE/ueditor.parse.js";
 export default {
   components: {
-    Editor
   },
   data() {
     return {
@@ -64,11 +52,6 @@ export default {
   },
   computed: {},
   mounted() {
-    const _this = this;
-    _this.editor = UE.getEditor("editor");
-    this.editor.addListener("ready", function() {
-      _this.editor.setContent(_this.defaultMsg);
-    });
   },
   methods: {
     add(name) {

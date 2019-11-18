@@ -13,9 +13,7 @@
     "iview": "^3.2.2",
     "nprogress": "^0.2.0",
     "vue": "^2.5.21",
-    "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.0.2",
-    "vue-ueditor-wrap": "^2.4.1"
   },
   "devDependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",

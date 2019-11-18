@@ -11,7 +11,6 @@ import wrapper from './components/system/Wrapper/index';
 import ueditor from './components/ueditor/index';
 Vue.component('Wrapper', wrapper);
 Vue.component('ueditor', ueditor);
-// import Editor from '@tinymce/tinymce-vue';
 Vue.prototype.$dayjs = dayjs;
 Vue.use(iView);
 
@@ -53,8 +52,5 @@ router.afterEach(() => {
 
 new Vue({
   router,
-  // components: {
-  //   'editor': Editor // <- Important part
-  // },
   render: h => h(App),
 }).$mount('#app');

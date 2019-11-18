@@ -1,50 +1,28 @@
 <template>
-  <div style="position:relative">
-    <script id="editor" type="text/plain" style="width:524px;height:500px;"></script>
-  </div>
+  <div id="editor">
+        <h1>欢迎</h1>
+            <p>22222222222</p>
+    </div>
 </template>
 
 <script>
-import "../../../public/ueditor/ueditor.config.js";
-import "../../../public/ueditor/ueditor.all.js";
-import "../../../public/ueditor/lang/zh-cn/zh-cn.js";
-import "../../../public/ueditor/ueditor.parse.js";
-
+import "../../../public/wangEditor-3.1.1/release/wangEditor.min.js";
 export default {
-  /**
-   在需要引入的组件中使用ue组件
-    <UEtor :defaultMsg=defaultMsg :config=config ref="ue"></UEtor>
-    defaultMsg: '这 里是UE测试,
-    config: {
-    IinitialFrameWidth: 1200,
-    initialFrameHeight: 350
-    }
-   */
   props: {
     defaultMsg: {
       type: String
-    },
-    config: {
-      type: Object,
-      default: () => {
-        return {
-          IinitialFrameWidth: 300,
-          initialFrameHeight: 350
-        };
-      }
     }
   },
   data() {
     return {
-      editor: null
     };
   },
   mounted() {
-    const _this = this;
-    _this.editor = UE.getEditor("editor", _this.config);
-    this.editor.addListener("ready", function() {
-      _this.editor.setContent(_this.defaultMsg);
-    });
+    var E = window.wangEditor;
+        var editor = new E('#editor');
+         editor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
+    // editor.customConfig.uploadImgServer = '/upload'  // 上传图片到服务器
+        editor.create();
   },
   methods: {
     getUEContent() {
