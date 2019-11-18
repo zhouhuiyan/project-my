@@ -12,13 +12,16 @@
       <FormItem class="item" prop="dest" label="文章简介：">
         <Input v-model="formItem.dest" type="textarea" :autosize="{minRows: 2,maxRows: 5}" />
       </FormItem>
-      <FormItem prop="content" label="文章内容：" class="item">
-        <Input v-model="formItem.content" type="textarea" :autosize="{minRows: 4,maxRows: 7}" />
+      <FormItem prop="content" label="文章内容：" class="item item-con">
+        <!-- <Input v-model="formItem.content" type="textarea" :autosize="{minRows: 4,maxRows: 7}" /> -->
         <!-- <editor
           width="500px"
           :apiKey="'3jpkbdwd3uvuh25ual55scqc4po3of4you6whoby5dixddiq'"
           v-model="formItem.content"
         ></editor>-->
+        <div style="width:700px">
+          <ueditor v-model="formItem.content"></ueditor>
+        </div>
       </FormItem>
 
       <FormItem class="item">
@@ -33,8 +36,7 @@
 import { systemAddArt } from "@/utils/rules.js";
 import { addArt, getTypeList } from "@/utils/api";
 export default {
-  components: {
-  },
+  components: {},
   data() {
     return {
       rule: systemAddArt,
@@ -47,12 +49,11 @@ export default {
       },
       content: "wo shi ce shi !",
       typeData: [],
-      defaultMsg:'333333333333333333'
+      defaultMsg: "333333333333333333"
     };
   },
   computed: {},
-  mounted() {
-  },
+  mounted() {},
   methods: {
     add(name) {
       this.$refs[name].validate(valid => {
@@ -88,7 +89,7 @@ export default {
   margin: 0 auto;
   padding-top: 20px;
   .item {
-    width: 400px;
+    width: 700px;
     margin: 0 auto 24px;
     text-align: left;
   }

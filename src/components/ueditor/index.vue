@@ -1,28 +1,27 @@
 <template>
-  <div id="editor">
-        <h1>欢迎</h1>
-            <p>22222222222</p>
-    </div>
+  <div id="editor"></div>
 </template>
 
 <script>
-import "../../../public/wangEditor-3.1.1/release/wangEditor.min.js";
+var e = require("wangeditor");
 export default {
   props: {
     defaultMsg: {
+      default: "文章标题",
       type: String
     }
   },
   data() {
-    return {
-    };
+    return {};
   },
   mounted() {
-    var E = window.wangEditor;
-        var editor = new E('#editor');
-         editor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
+    var E = e; // 使用 npm 安装
+    // var E = window;
+    var editor = new E("#editor");
+    editor.customConfig.uploadImgShowBase64 = true; // 使用 base64 保存图片
     // editor.customConfig.uploadImgServer = '/upload'  // 上传图片到服务器
-        editor.create();
+    editor.create();
+    editor.txt.html(this.defaultMsg);
   },
   methods: {
     getUEContent() {
@@ -36,4 +35,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
+#editor {
+  width: 100%;
+  height: 500px;
+}
 </style>
